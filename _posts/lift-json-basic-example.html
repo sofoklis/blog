@@ -1,0 +1,16 @@
+title: Lift Json autocomplete example
+date: 2012/02/08 01:03:00 -0800
+tags: [{"name":"autocomplete","id":98425269},{"name":"json","id":98425259},{"name":"lift","id":98425255},{"name":"scala","id":98425294}]
+author: Sofoklis Papasofokli
+alias: /lift-json-basic-example
+
+<p>After I managed to do an <a href="http://sofoklis.posterous.com/lift-ajax-very-basics">ajax call</a> the next thing that I need to try is Json. For this example I will try to emulate the jQueryUI autocomplete component with remote Jsonp datasource, you can find the jQuery example here:</p>
+<p><a href="http://jqueryui.com/demos/autocomplete/#remote-jsonp">http://jqueryui.com/demos/autocomplete/#remote-jsonp</a></p>
+<p>This example is particularly usufull if you have very large datasets where you don't want to send all the data to the client. Try to send all the 8000 elements to your javascript things will be pretty unresponsive. Json is also more efficient and works with most modern Javascript frameworks, also you avoid html rendering/redrawing and simply update the json source for various components. The code we want to port to a lift snippet is summarized here:</p>
+<p><p><a href="https://gist.github.com/1747029">https://gist.github.com/1747029</a></p></p>
+<p>As you can see there's already a jquery ajax call here, like the one discriped in a <a href="http://sofoklis.posterous.com/lift-ajax-very-basics">previous post</a>. Here we have a few more options so lets see how this will work with lift.</p>
+<p>The main idea that I tried to implement is json messages between my javascript code and the snippet code (I guess something like actor programming). I love the way Lift takes away all the parsing/serializing and leaves the code so clean and compact. The only thing that I didnt manage to do properly is return a Json object from my snippet. I had to do some hacking there but I think everything else is very straight forward.</p>
+<p>The Html:</p>
+<p><p><a href="https://gist.github.com/1766968">https://gist.github.com/1766968</a></p></p>
+<p>The Snippet code:</p>
+<p><p><a href="https://gist.github.com/1766971">https://gist.github.com/1766971</a></p></p>

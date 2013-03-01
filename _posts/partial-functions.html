@@ -1,0 +1,14 @@
+title: Partial Functions
+date: 2013/01/28 10:22:00 -0800
+tags: [{"name":"applyOrElse","id":125487685},{"name":"case","id":125487687},{"name":"function","id":125487683},{"name":"orElse","id":125487684},{"name":"partial function","id":125487682},{"name":"scala","id":125487686}]
+author: Sofoklis Papasofokli
+alias: /partial-functions
+
+<p>Partial functions are functions that are not defined for all possible input.</p>
+<blockquote class="posterous_medium_quote">
+<p>The main distinction between PartialFunction and scala.Function1 is that the user of a PartialFunction may choose to do something different with input that is declared to be outside its domain.</p>
+</blockquote>
+<p>So you can pretty much use a PartialFunction anywhere you would use a Function1 since it is a proper subtype, plus some extras.</p>
+<p><p><a href="https://gist.github.com/4657634">https://gist.github.com/4657634</a></p></p>
+<p>The <strong>applyOrElse</strong> function used last in the above example takes a regular function and applies that if the partial function is not defined at the argument. There is one more method <strong>orElse</strong> that takes a partial function and creates a partial function that is defined at the union of the 2 partial functions that generate it. It is equivalent to a <strong>case</strong> statement that combines the functions. Note here that the order also matters in case the ranges overlap.</p>
+<p><p><a href="https://gist.github.com/4657783">https://gist.github.com/4657783</a></p></p>

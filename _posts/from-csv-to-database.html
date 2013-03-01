@@ -1,0 +1,20 @@
+title: From CSV to objects with Scala's pattern matching
+date: 2012/03/07 01:54:00 -0800
+tags: [{"name":"case classes","id":103490639},{"name":"csv","id":103490646},{"name":"pattern matching","id":103490637},{"name":"regular expressions","id":103490644},{"name":"scala","id":103490638},{"name":"squeryl","id":103490631}]
+author: Sofoklis Papasofokli
+alias: /from-csv-to-database
+
+<p>One or the primary reasons I liked scala so much is pattern matching. In combination with Case classes its an extremely powerful tool.</p>
+<p>Any software project includes some sort of migration. Most common way that data comes in is text files with some delimiters. So lets say we pick up a file that contains lines like the bellow:</p>
+<p><p><a href="https://gist.github.com/1992324">https://gist.github.com/1992324</a></p></p>
+<p>Here text fields are surrounded by ~ and all columns separated by ^</p>
+<p>So how do you import this into Scala?</p>
+<p>The idea is to create a small regular expression for each of the fields you expect to get. For example a string regular expression for the strings:</p>
+<p><strong><span class="k">val</span> <span class="n">text</span> <span class="k">=</span> <span class="s">"""~([^~]*)~"""</span></strong></p>
+<p><span class="s">Then you compose these fields in a line regular expression like the following:</span></p>
+<p><strong><span class="k">val</span> <span class="nc">RegEx</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">digit</span><span class="o">,</span> <span class="n">text</span><span class="o">,</span> <span class="n">text</span><span class="o">,</span> <span class="n">text</span><span class="o">,</span> <span class="n">double</span><span class="o">).</span><span class="n">mkString</span><span class="o">(</span><span class="n">separator</span><span class="o">).</span><span class="n">r</span></strong></p>
+<p>and finally read the lines and for each one match on the full regular expression:</p>
+<p><p><a href="https://gist.github.com/1992349">https://gist.github.com/1992349</a></p></p>
+<p>heres the full code for the example:</p>
+<p><p><a href="https://gist.github.com/1992310">https://gist.github.com/1992310</a></p></p>
+<p>Note here that the full code that actually reads and extracts the information from the file is less than 10 lines, and only 2-3 of them actually are where the magic is happening. If you are doing more than one tables of the same format you should be able to abstract a lot of this code and simply have a function of 3-4 lines of scala code for each table. If you are using <a href="http://squeryl.org/">Squeryl</a> or any other ORM it should be very very simple to insert into the database, especially if you are following the import table definition.</p>

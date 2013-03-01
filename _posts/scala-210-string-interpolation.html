@@ -1,0 +1,13 @@
+title: Scala 2.10 string interpolation
+date: 2013/01/23 11:39:00 -0800
+tags: [{"name":"scala","id":125386453},{"name":"string interpolation","id":125386454}]
+author: Sofoklis Papasofokli
+alias: /scala-210-string-interpolation
+
+<p>A new feature in Scala 2.10 is string interpolation. The idea is that anytime the compiler finds a literal of the form <strong>id"some string"</strong>, it transforms it to a method call on an instance of <strong>StringContext</strong>. Scala 2.10 defines 3 methods for this use: <strong>s</strong>, <strong>f</strong>, <strong>raw</strong><span style="font-family: mceinline;">. <span style="font-family: mceinline;">You can see b<span style="font-family: mceinline;">asic us<span style="font-family: mceinline;">e of each b<span style="font-family: mceinline;">ellow:</span></span></span></span></span></p>
+<p><p><a href="https://gist.github.com/4611174">https://gist.github.com/4611174</a></p></p>
+<p>Nice thing about this feature is that you can very easily create your own functions for similar use, either to support some other string format like json, xml etc or to create your own functions. For example the following.</p>
+<p><p><a href="https://gist.github.com/4612013">https://gist.github.com/4612013</a></p></p>
+<p>At one of his talks Martin said that this might be a possible replacement for xml literals in future versions of scala, meaning that instead of xml being a part of the language it will become an implementation in a library, making the scala language simpler.</p>
+<p>References:</p>
+<p><a href="http://docs.scala-lang.org/overviews/core/string-interpolation.html">http://docs.scala-lang.org/overviews/core/string-interpolation.html</a></p>

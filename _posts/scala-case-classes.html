@@ -1,0 +1,23 @@
+title: Scala CASE classes
+date: 2012/07/26 05:51:22 -0700
+tags: []
+author: Sofoklis Papasofokli
+alias: /scala-case-classes
+
+<p>When you create a case class in scala say like</p>
+<p>case class Something (id: Int)</p>
+<p>you get the following from the compiler:</p>
+<ul>
+<li>the apply method so you can write <strong>Something(4)</strong> instead of <strong>new Something(4)</strong> when you are creating your objects</li>
+<li>the compiler adds the <strong>val</strong>&nbsp;since <strong>all the fields are immutable</strong></li>
+<li>you get a copy function to create modified copies of your object like so: &nbsp;&nbsp;<strong>Something(6).copy(something = 7)</strong> and by using named parameters you can change only the value that changes.</li>
+</ul>
+<p>Benefits of case classes:</p>
+<ul>
+<li>immutability, you can count on them not changing after they are created</li>
+<li>very nice to use in pattern matching</li>
+<li>very nice to use with tree structures and sealed classes</li>
+<li>meaningfull <strong>equals</strong>, <strong>hashCode </strong>and <strong>toString </strong>methods, especiall they first 2 might not be trivial to write.</li>
+</ul>
+<ul>
+</ul>

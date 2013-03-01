@@ -1,0 +1,21 @@
+title: Lift Ajax very basics
+date: 2012/02/03 04:14:00 -0800
+tags: [{"name":"ajax","id":98425421},{"name":"button","id":98425431},{"name":"lift","id":98425415},{"name":"scala","id":98425414}]
+author: Sofoklis Papasofokli
+alias: /lift-ajax-very-basics
+
+<p>I like to work with the very basics and be able to use some of the new stuff that is out there like the jQueryUI components etc, and to customize them enough to be specific to my exact needs. To do that I had to go though all the details of how lift does ajax and json calls. So lets start:</p>
+<p>first thing the jquery ajax call:</p>
+<p><a href="http://api.jquery.com/jQuery.ajax/" title="jqury ajax">http://api.jquery.com/jQuery.ajax/ </a></p>
+<p>here the basic definition of the ajax function is as follows:</p>
+<p><a href="http://git://gist.github.com/1729878.git" class="git_url_facebox" rel="#git-clone"><p><a href="https://gist.github.com/1729878">https://gist.github.com/1729878</a></p></a></p>
+<p>This is essentially what you want to do in most cases, say bind it to a javascript callback function that updates the ui or a variable.</p>
+<p><strong>Problem: what url to use, and where to put the success funtion?</strong> lets have a look.</p>
+<p>Lifts has a way to make ajax calls a lot more secure and even bind it to a callback function specific even to an object. This is very nice functionality since it allows you to send minimum information to the client and keep most of the state on the server.</p>
+<p>The basic idea is that all ajax handlers are maintained in a <strong>Map[String, AFuncHolder]</strong>. Whenever you create a lift ajax call you get back a <strong>(String, JsExp)</strong>. The String part is key in the map to access the callback function. JsExp is the javascript you need to call this function from the clientsite, think of it as your jQuery url. So lets see a basic example: a jquery button</p>
+<p>first the html template:</p>
+<p><p><a href="https://gist.github.com/1730616">https://gist.github.com/1730616</a></p></p>
+<p>The lift snippet with enough comments:</p>
+<p><p><a href="https://gist.github.com/1730594">https://gist.github.com/1730594</a></p></p>
+<p><strong>Essentially the result of the callback function is the success funtion.</strong></p>
+<p><strong>The aCall._2.toJsCmd will give you an alternative to the URL of the jQuery ajax function, that is more secure and used wisely will give you so much more that.</strong></p>

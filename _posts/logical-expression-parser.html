@@ -1,0 +1,27 @@
+title: Logical Expression parser
+date: 2012/08/13 13:46:00 -0700
+tags: [{"name":".net","id":115352273},{"name":"grammar","id":115352326},{"name":"logical expression","id":115352325},{"name":"parser combinators","id":115352223},{"name":"scala","id":115352261},{"name":"sprache","id":115352272}]
+author: Sofoklis Papasofokli
+alias: /logical-expression-parser
+
+<p>Recently we I had a requirement to enhance the rule engine for our system to use a logical expression formulae to calculate result of several rules associated with a validation.</p>
+<p>Until that point all rules had to succeed so it was a straight forward AND between all rules, instead of trying to create a complecated user interface we decided to go with a formulae expression. This of course means that we have to validate during setup and ofcourse evaluate the result based on individual rule result at runtime.</p>
+<p>Since this was for for a platform closer to .NET and based on my reading of the Programming in Scala, i looked at parser combinators, and it seems that there are some things there for .NET see for example <a href="http://code.google.com/p/sprache/">Sprache</a> but finally we decided not to use it becuase we didnt want to use external libraries for this project. I ended up using <strong>new System.Data.DataTable().Compute(...)</strong> to evaluate the expression and regular expressions to limit the operations and tokens only to the rules defined for the particular validation.</p>
+<p>The solution works, but I really enjoyed the trip with <a href="http://www.artima.com/shop/programming_in_scala_2ed">parser combinators(Programming in Scala chapter 33)</a>, and I do feel that it is a great tool to have, so i decided to see how i could do the same in Scala, so here it goes:</p>
+<p>First I got the <a href="http://compilers.iecc.com/crenshaw/tutor6.txt">grammar</a> for the logical expression and then after reading the rules from the Programming in Scala book i ended up with the following class:</p>
+<p><p><a href="https://gist.github.com/3343973">https://gist.github.com/3343973</a></p></p>
+<p>I decided to make it a class that takes a Map[String, Boolean], so i can pass it to my expression parser. The additional benefit of this is that it parses expressions only for the variables in the map, anything else will fail during parsing, so you can really make sure your expression is correct according to your validation rules. One can restrict the rule names to propper identifiers or even more strict but that is outside the scope of this exersice. Finally the code that describes the logical expression is not more than 7 lines including parsing and evaluation which is mindblowing concidering that no external libraries are used just the core scala libraries.</p>
+<p>So lets have a look at one of the parsers:</p>
+<p><p><a href="https://gist.github.com/3483568">https://gist.github.com/3483568</a></p></p>
+<p>here the parser is splited in 2 parts, first the part before the ^^<span class="n">&nbsp;</span></p>
+<p><span class="n"><p><a href="https://gist.github.com/3483572">https://gist.github.com/3483572</a></p></span></p>
+<p>which is the actual parser saying that b_not_factor is an optional "not" followed by a factor.</p>
+<p>The next part is the part that is doing the evaluation:</p>
+<p><span class="o"><p><a href="https://gist.github.com/3483573">https://gist.github.com/3483573</a></p></span></p>
+<p>in this case we have 2 cases, one a "not" exists so we have to negate the b_factor, or it doesn't and then we just evaluate the b_factor.</p>
+<p>Finally the combination of these small parsers is what gives the grammar for the logical expression.</p>
+<div class="CodeRay">
+  <div class="code"><pre>  </pre></div>
+</div>
+
+<p>&nbsp;</p>

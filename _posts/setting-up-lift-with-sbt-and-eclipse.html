@@ -1,0 +1,19 @@
+title: Setting up lift with SBT and Eclipse
+date: 2012/02/01 00:47:00 -0800
+tags: [{"name":"eclipse","id":98425403},{"name":"lift","id":98425392},{"name":"sbt","id":98425389},{"name":"scala","id":98425404}]
+author: Sofoklis Papasofokli
+alias: /setting-up-lift-with-sbt-and-eclipse
+
+<p>To install simply add the following to the project/plugins.sbt and make sure you keep new lines between all the settings in your sbt files, you need to add the xsbt plugin to be able to run the container:start/stop commands and run your project</p>
+<p><p><a href="https://gist.github.com/1716027">https://gist.github.com/1716027</a></p></p>
+<p>You can define new keys in project/Build.scala or any other .scala file under the project folder</p>
+<p><p><a href="https://gist.github.com/1716152">https://gist.github.com/1716152</a></p></p>
+<p>in build.sbt add the following line, you need this to have library sources for all your dependencies and you can use your keys to fetch your dependencies:</p>
+<p><p><a href="https://gist.github.com/1716041">https://gist.github.com/1716041</a></p></p>
+<p>after this is done you should be able to run <strong>sbt eclipse</strong>&nbsp;and it will generate the eclipse project files for you. If you already have the eclipse project remove it from your workspace and import it again after you execute <strong>sbt eclipse</strong>. You should be able to browse code in eclipse.</p>
+<p>Compile your project:</p>
+<p><strong>sbt compile</strong></p>
+<p>run:</p>
+<p><strong>sbt</strong></p>
+<p><strong>container:start</strong></p>
+<p><strong>container:stop</strong></p>

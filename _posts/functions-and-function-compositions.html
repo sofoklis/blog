@@ -1,0 +1,18 @@
+title: Functions and function compositions
+date: 2013/01/27 09:58:00 -0800
+tags: [{"name":"andThen","id":125460785},{"name":"compose","id":125460786},{"name":"composition","id":125460784},{"name":"function","id":125460783},{"name":"scala","id":125460787}]
+author: Sofoklis Papasofokli
+alias: /functions-and-function-compositions
+
+<blockquote class="posterous_short_quote">
+<p>Scala has first-class functions. Not only can you define functions and call<br />them, but you can write down functions as unnamed literals and then pass<br />them around as values.</p>
+</blockquote>
+<p>And as such we can do the following:</p>
+<p><p><a href="https://gist.github.com/4649401">https://gist.github.com/4649401</a></p></p>
+<p>So we have first class functions, and what we did is good already, but what else can we do?</p>
+<p>Well in scala functions inherit from <strong>Function1</strong>...22 traits depending on the number of arguments they have. The <strong>Function1</strong> <span style="font-family: mceinline;">trai<span style="font-family: mceinline;">t <span style="font-family: mceinline;">provides some extra functionality we can use to get some more juice out of <span style="font-family: mceinline;">scala functions.</span></span></span></span></p>
+<p><p><a href="https://gist.github.com/4638497">https://gist.github.com/4638497</a></p></p>
+<p>So using function composition you can create more interesting logic out of simple functions. This makes it easier to test, debug and even prove you functions to be correct(provided you don't have side effects and simply return the result).</p>
+<p>References:</p>
+<p><a href="http://booksites.artima.com/programming_in_scala_2ed">Programming in Scala, 2nd Edition</a></p>
+<p>&nbsp;</p>

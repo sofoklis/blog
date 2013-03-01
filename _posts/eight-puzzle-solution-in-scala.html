@@ -1,0 +1,28 @@
+title: Eight Puzzle solution in scala
+date: 2013/02/21 14:29:00 -0800
+tags: [{"name":"8-puzzle","id":125916772},{"name":"A*","id":125916777},{"name":"ai planning","id":125916774},{"name":"artificial intelligence planning","id":125916773},{"name":"BFS","id":125916778},{"name":"eight-puzzle","id":125916775},{"name":"scala","id":125916776}]
+author: Sofoklis Papasofokli
+alias: /eight-puzzle-solution-in-scala
+
+<p>This post is about solving an interesting game as a search problem in Scala and seeing how different heuristics can help find optimal solutions much faster than than regular breath first algorithm. Similar game search problems for example the <a href="http://demonstrations.wolfram.com/WaterPouringProblem/">water pouring problem</a> and the <a href="http://www.coolmath-games.com/0-bloxorz/index.html">Bloxorz </a>were part of Martin's lectures and homework in the Streams (lazy evaluated lists) part of the course. The problem came from the coursera course in <a href="https://www.coursera.org/course/aiplan">Artificial Intelligence Planning</a>.</p>
+<p><strong>The problem</strong> is the Eight Puzzle Problem described more precisely <a href="http://130.203.133.150/viewdoc/versions;jsessionid=837968A4F025C15C4D6B086F5D7465CE?doi=10.1.1.4.7500&amp;version=3">here</a>.</p>
+<p>The problem theory says there are 2 disjoint sets of states for the game, and that any problem starting from an initial state in either set, can only reach other states in the same set using valid game moves. The problem is not solvable in case you are trying to reach a state in the other set. There are also some rules to check whether a solution is possible between 2 states(you can read more <a href="http://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html">here</a>), but since we want to burn some CPU muscle, we will ignore it for now.</p>
+<p>The worst case scenario would be to cover all 9!/2 exactly 181440, possible states starting from any initial position, either to find it in the lowest possible level with a maximum move depth of 31 or to show that a solution cannot be found. This of course without repeating already visited states and going into loops.</p>
+<p><strong>Solution 1</strong></p>
+<p>I tried the solution using a regular BFS using Streams in the same way it was done for the afore mentioned problems in the Scala course, but after a certain depth it seemed to hang and also used too much memory, I guess it has to do with all the closures that needs to stay in memory until they need to be evaluated. I am still looking into that but I am not sure why there is such a difference, I will update this part when I know more.</p>
+<p><strong>Solution 2</strong></p>
+<p>Then I tried the same problem using lists instead of streams, also used <a href="http://www.scala-lang.org/api/current/index.html#scala.annotation.tailrec">@tailrec</a> to make sure the compiler would optimize my function to work as a loop. The program run in ~50 seconds to calculate all possible solutions to the problem and the heart of it looks like this:</p>
+<p><p><a href="https://gist.github.com/5008374">https://gist.github.com/5008374</a></p></p>
+<p>The method is final and saves the result in the <strong>acc</strong> List so that the recursive call is the last operation and the method can be optimized with <strong>@tailrec</strong>.</p>
+<p><strong>Solution 3</strong></p>
+<p>The third solution involves the <a href="http://en.wikipedia.org/wiki/A*_search_algorithm"><strong>A*</strong> algorithm</a> to make a better selection of the next node to work on. Simply put A* uses a priority queue where the nodes are ordered using an evaluation function <strong>f(n)</strong> which is the sum of the distance of the node from the initial state <strong>g(n)</strong> and a heuristic function <strong>h(n)</strong> which following some properties guaranties we get the optimal solution to our problem.</p>
+<p>The code looks like this:</p>
+<p><p><a href="https://gist.github.com/5008493">https://gist.github.com/5008493</a></p></p>
+<p>Again its optimized to do <strong>@tailrec</strong> same as before. Difference is that I am only looking for the answer to the specific case so i will not create all possible states, but work only according to the highest priority <strong>f(n)</strong> and so the "best" route to my solution.</p>
+<p>First i tried it using <strong>h(n)</strong> to be the number of misplaced tiles and the solution to the deepest possible state from my initial state (debth 31) took ~4 seconds, thats a great improvement, already given that to find this solution using regular BFS I would actually have to go through all possible states since its at the deepest level, so it's a performance improvement of a magnitude of 10.</p>
+<p>Then i tried using a Manhattan block distance as my <strong>h(n). </strong>This is a better heuristic since it has more information as to how far I am from the solution. This time the solution came in just ~0.5 seconds, about 100 times faster than my initial solution.</p>
+<p>Switching heuristic functions is actually trivial, and its easy to create your own and run the solution again to see if you can come up with a better one than the Manhattan block distance.</p>
+<p><p><a href="https://gist.github.com/5008832">https://gist.github.com/5008832</a></p></p>
+<p>Bellow is the full code for the problem solution:</p>
+<p><p><a href="https://gist.github.com/5008763">https://gist.github.com/5008763</a></p></p>
+<p>&nbsp;</p>

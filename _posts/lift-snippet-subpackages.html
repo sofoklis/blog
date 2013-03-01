@@ -1,0 +1,12 @@
+title: Lift snippet subpackages
+date: 2012/02/22 05:26:00 -0800
+tags: [{"name":"html5","id":103490685},{"name":"lift","id":103490678},{"name":"scala","id":103490679},{"name":"snippet","id":103490686},{"name":"subpackage","id":103490682}]
+author: Sofoklis Papasofokli
+alias: /lift-snippet-subpackages
+
+<p>After a while lift project becomes big enough and you will probably want to break your files into subpackages here's what you need to do:</p>
+<ol>
+<li>Add your default snippet package for example if your base snippet package is my.project.snippet then in your boot file add the line:&nbsp;<strong>LiftRules.addToPackages("my.project")</strong>&nbsp;</li>
+<li>Create subpackages under your snippet package and put your scala code in there.</li>
+<li>In your html5 templates point to your snippets by using subpackage/SnippetName like the following: &lt;div data-lift="subpackage/SnippetName"&gt;&lt;/div&gt;</li>
+</ol>

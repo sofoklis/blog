@@ -1,0 +1,25 @@
+title: Futures & Promises 2.10
+date: 2013/01/09 04:45:00 -0800
+tags: [{"name":"Async","id":125268712},{"name":"Callbacks","id":125268711},{"name":"concurency","id":125268715},{"name":"Futures","id":125268709},{"name":"multithreading","id":125268713},{"name":"Promises","id":125268710},{"name":"scala","id":125268707},{"name":"scala 2.10","id":125268708},{"name":"SIP-14","id":125268714}]
+author: Sofoklis Papasofokli
+alias: /futures-promises-210
+
+<p><a href="http://en.wikipedia.org/wiki/Callback_(computer_programming)">Callbacks</a>, the abiliby to reference a code fragment and pass it as argument to to another function is very popular and its used throught the application layers. I can be blocking or non blocking(used for IO, event processing). In scala async callbacks are done using&nbsp;<strong>futures</strong> and futures were implemented in many of the frameworks build ontop of scala.</p>
+<p>In scala 2.10 there is a new implementation of Futures and adds the implentation of Promises.&nbsp;</p>
+<p>The goals of this new implemention are:</p>
+<p>1. To have a single implenation of this functionality (not one per framework).</p>
+<p>2. To make this implementaion efficient and composable.</p>
+<p>3. To take advantage of scala's power to make futures a more powerfull tool.</p>
+<p>So what are Futures &amp; Promises</p>
+<p><strong>Futures</strong> - Read only. Placeholder that may hold the result of a computation or the exception in case of a failure. "It is in effect immutable" which means you can pass it around to other threads whithout fear of it getting corrupted.</p>
+<p>Futures have hooks for the expected outcomes:</p>
+<p>onComplete, onSuccess, onFailure</p>
+<p>These callbacks are executed independently and without a specific order between them (at least in the default implementation).</p>
+<p>You should be carefull with the amount of pending futures as they become available for garbage collection only once they are executed. So you should see a memory during the time a lot of them are pending.</p>
+<p><strong>Promises</strong>&nbsp;- Writable once, scala framework takes care of this so you dont have to. A promise completes its future by providing the return value or the exception in case of failure. For a promise <strong>p</strong> the correcponding future is <strong>p.future</strong>.&nbsp;</p>
+<p>You can use <strong>p success value</strong>&nbsp;or <strong>p failure exception</strong>&nbsp;to complete p.future. If the promise was already set, an exception is thrown, for that reason there are the <strong>p trySuccess value</strong> and <strong>p tryFailure exception</strong>&nbsp;methods which will complete the promise only it if is not already completed.</p>
+<p>Some more reading material, whith a lot more details:</p>
+<p><a href="https://speakerdeck.com/heathermiller/futures-and-promises-in-scala-2-dot-10">Heather Millers presentation</a>, <a href="http://docs.scala-lang.org/sips/pending/futures-promises.html">SIP-14 Futures &amp; Promises</a>.</p>
+<p>And here is a complete example for simple use of futures and promises:</p>
+<p><p><a href="https://gist.github.com/4492880">https://gist.github.com/4492880</a></p></p>
+<p>&nbsp;</p>

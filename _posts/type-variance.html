@@ -1,0 +1,23 @@
+title: Intro to type variance
+date: 2013/01/16 13:02:00 -0800
+tags: [{"name":" non variant","id":125268678},{"name":"contravariant","id":125268680},{"name":"covariant","id":125268679},{"name":"generic type","id":125268682},{"name":"intro","id":125268683},{"name":"scala","id":125268681},{"name":"type variance","id":125268677}]
+author: Sofoklis Papasofokli
+alias: /type-variance
+
+<p>Type variance is a design decision we have to make when we create a class with a type parameter, also known as a generic type. We have 3 options listed bellow:</p>
+<p><strong>1. Non Variant type</strong></p>
+<p><strong></strong>So this is the definition:</p>
+<p><p><a href="https://gist.github.com/4550281">https://gist.github.com/4550281</a></p></p>
+<p>At this point our GenericType has <strong>no type variance</strong>, which means we cannot substitute <strong>NonVariantType[String]</strong> with a <strong>NonVariantType[Any]</strong>&nbsp;or the other way around. This is demonstrated bellow:</p>
+<p><p><a href="https://gist.github.com/4550404">https://gist.github.com/4550404</a></p></p>
+<p><strong>2. Covariant Type</strong></p>
+<p>If we expect our generic type to work with subtypes of our type parameter in the same way as the type we&nbsp;instantiate&nbsp;it with, then we define our type as a covariant type:</p>
+<p><p><a href="https://gist.github.com/4550479">https://gist.github.com/4550479</a></p></p>
+<p>So with our new definition we repeat our example from before using our covariant type:</p>
+<p><p><a href="https://gist.github.com/4550489">https://gist.github.com/4550489</a></p></p>
+<p><strong>3. Contravariant Type</strong></p>
+<p>If we expect our generic type to work with supertypes of our type parameter in the same way as they type we instantiate it with, then we define our type as a contravariant type:</p>
+<p><p><a href="https://gist.github.com/4550879">https://gist.github.com/4550879</a></p></p>
+<p>And finally with the contravariant definition we have our example looking like this:</p>
+<p><p><a href="https://gist.github.com/4550868">https://gist.github.com/4550868</a></p></p>
+<p>Here I tried to list the simplest ways your generic types can be defined over their parameter type without going into much detail, following posts will deal with the details of selecting each one.</p>

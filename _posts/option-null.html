@@ -1,0 +1,22 @@
+title: Optio-null
+date: 2013/01/17 07:35:00 -0800
+tags: [{"name":"case","id":125284753},{"name":"flatMap","id":125284751},{"name":"for","id":125286048},{"name":"match","id":125284754},{"name":"None","id":125284750},{"name":"option","id":125284748},{"name":"pattern matching","id":125284752},{"name":"Some","id":125284749}]
+author: Sofoklis Papasofokli
+alias: /option-null
+
+<p>One of the first classes you will encounter in Scala is <a href="http://www.scala-lang.org/api/current/index.html#scala.Option">Option</a> class which has 2 subclasses Some and None.&nbsp;</p>
+<blockquote class="posterous_short_quote">
+<p>Represents optional values. Instances of Option are either an instance of Scala. Some or the object None</p>
+</blockquote>
+<p><span style="font-family: Arial, sans-serif;">Basic use case of declaring and using pattern matching on options, notice the difference between <strong>Some(null)</strong> and <strong>Option(null)</strong>:</span></p>
+<p><span style="font-family: Arial, sans-serif;"><p><a href="https://gist.github.com/4556227">https://gist.github.com/4556227</a></p></span></p>
+<p><span style="font-family: Arial, sans-serif;">Lets try <strong>toList</strong> on option values.</span></p>
+<p><p><a href="https://gist.github.com/4564179">https://gist.github.com/4564179</a></p></p>
+<p><span style="font-family: Arial, sans-serif;">Since <strong> None</strong> is like the "empty list", you can use them to compose expressions  over Options without having to worry about <strong>None</strong>, in the same way you  dont have to worry about handling the empty list.</span></p>
+<p><span style="font-family: Arial, sans-serif;"><span style="font-family: Arial, sans-serif;"><span style="font-family: Arial, sans-serif;">Option has support for <strong>map</strong>, <strong>flatMap</strong> and <strong>withFilter</strong>. We know that if we have these functions we can use the <strong>for</strong> expression. </span></span></span></p>
+<p><span style="font-family: Arial, sans-serif;"><span style="font-family: Arial, sans-serif;">Its worth looking at&nbsp;<strong>map</strong>,&nbsp;<strong>for</strong>, <strong>flatMap</strong> and <strong>foreach</strong> over option values. </span>With the above in mind you can&nbsp; write more compact code on<strong>&nbsp;Some(x)</strong> which is the non empty list for Options. So if you use these functions over a <strong>None</strong> you always get <strong>None</strong> back, same as when you use them with <strong>List()</strong>.</span></p>
+<p><span style="font-family: Arial, sans-serif;"><p><a href="https://gist.github.com/4556379">https://gist.github.com/4556379</a></p></span></p>
+<p><span style="font-family: Arial, sans-serif;">In the following example, note that <strong>flatMap</strong> followed by <strong>map</strong> removes the <strong>None</strong> from the list. If you consider that <strong>flatMap</strong> aggregates the resulting lists, since <strong>None</strong> is the same as the empty list, its natural that you don&rsquo;t see them in the result.<br /></span></p>
+<p><span style="font-family: Arial, sans-serif;"><p><a href="https://gist.github.com/4578032">https://gist.github.com/4578032</a></p></span></p>
+<p><span style="font-family: Arial, sans-serif;">Finally one more very nice trick I read recently from <a href="http://www.manning.com/suereth/">Scala in Depth</a> for creating functions that handle values with optional arguments out of functions that take non optional parameters.<br /></span></p>
+<p><span style="font-family: Arial, sans-serif;"><p><a href="https://gist.github.com/4649849">https://gist.github.com/4649849</a></p><br /></span></p>

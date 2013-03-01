@@ -1,0 +1,25 @@
+title: Type classes
+date: 2013/02/05 02:03:00 -0800
+tags: [{"name":"ad-hoc polymorphism","id":125644509},{"name":"concept","id":125644383},{"name":"model","id":125644384},{"name":"scala","id":125489785},{"name":"type classes","id":125489786},{"name":"typed traits","id":125644382}]
+author: Sofoklis Papasofokli
+alias: /type-classes
+
+<blockquote class="posterous_medium_quote">
+<p>Type classes were originally developed in Haskell as a disciplined alternative to ad-hoc polymorphism. Type classes have been shown to provide a type-safe solution to important challenges in software engineering and programming languages such as, for example, retroactive extension of programs. They are also recognized as a good mechanism for concept-based generic programming ...</p>
+</blockquote>
+<p>As it turns out type classes are a good way to</p>
+<ol>
+<li>extend functionality of our types without having to change original code</li>
+<li>to write generic code based on concepts</li>
+</ol>
+<p>Sounds nice, but lets see what we have to do to get it.</p>
+<p>First we need to define our "<strong>Concept</strong>". The concept is a <strong>typed trait</strong> which defines some functionality we expect to have. We will use a very simple Concept with only one method <strong>describe</strong>, which gives a text description of our concept.</p>
+<p>Next we need to create some "<strong>Models</strong>" which are implementations of our Concept. The models can be defined as implicit classes so that there is an automatic conversion of the type they implement to the concept model.</p>
+<p>The result is that whenever a concept method is used on a type, the compiler will try to automatically convert that type into a concept model. If a model is available the conversion will succeed, the type will be elevated to our concept and the method will do what we expect, otherwise we get a compiler error.</p>
+<p><p><a href="https://gist.github.com/4713509">https://gist.github.com/4713509</a></p></p>
+<p>We see here that without changing the implementation of the <strong>Int</strong> or <strong>List[Int]</strong> <span style="font-family: mceinline;">classes of scala we were <span style="font-family: mceinline;">able to extend their functionality and give them a <strong>describe</strong> method</span></span> which to the user of our concept looks exactly like a regular method.</p>
+<p>Hence we can write our code generic and based on concepts and use models to convert our usual types to the concepts. As we saw we can different models for different parts of the application, so an html description can be different that a text description, but the "client code" is exactly the same.</p>
+<p>References:</p>
+<p><a href="http://ropas.snu.ac.kr/~bruno/papers/TypeClasses.pdf">http://ropas.snu.ac.kr/~bruno/papers/TypeClasses.pdf</a></p>
+<p><a href="http://lampwww.epfl.ch/~odersky/talks/wg2.8-boston06.pdf">http://lampwww.epfl.ch/~odersky/talks/wg2.8-boston06.pdf</a></p>
+<p><a href="http://www.haskell.org/tutorial/classes.html">http://www.haskell.org/tutorial/classes.html</a></p>

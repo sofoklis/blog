@@ -1,0 +1,11 @@
+title: Scala 2.10 and Akka 2.1.0
+date: 2013/01/12 00:13:00 -0800
+tags: [{"name":"akka","id":125268696},{"name":"scala","id":125268695},{"name":"scala 2.10","id":125268697}]
+author: Sofoklis Papasofokli
+alias: /scala-210-and-akka-210
+
+<p>First I tried to modify the akka example from typesafe to work with the new scala and akka versions, you can find the modyfied project <a href="https://github.com/sofoklis/akka-project-in-scala">here</a> (with eclipse plugin).</p>
+<p>Changes I made were to fix compilation due to classes moved from Akka into scala concurent (SIP-14) and&nbsp;some changes so all 8 cores of my system will be working for a little more.</p>
+<p>It was nice to see that all of them were on full capacity during the run, if you try it with 4 workers you can see that about 1/2 of the cpu capacity is not used.</p>
+<p>Also I find usefull to use <strong>eclipse with-source=true</strong>&nbsp;in sbt to download the sources, makes browsing the code in eclipse a brease.</p>
+<p>&nbsp;</p>
