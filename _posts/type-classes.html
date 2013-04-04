@@ -16,7 +16,7 @@ alias: /type-classes
 <p>First we need to define our "<strong>Concept</strong>". The concept is a <strong>typed trait</strong> which defines some functionality we expect to have. We will use a very simple Concept with only one method <strong>describe</strong>, which gives a text description of our concept.</p>
 <p>Next we need to create some "<strong>Models</strong>" which are implementations of our Concept. The models can be defined as implicit classes so that there is an automatic conversion of the type they implement to the concept model.</p>
 <p>The result is that whenever a concept method is used on a type, the compiler will try to automatically convert that type into a concept model. If a model is available the conversion will succeed, the type will be elevated to our concept and the method will do what we expect, otherwise we get a compiler error.</p>
-<p><p><a href="https://gist.github.com/4713509">https://gist.github.com/4713509</a></p></p>
+<script src="https://gist.github.com/sofoklis/4713509.js"></script>
 <p>We see here that without changing the implementation of the <strong>Int</strong> or <strong>List[Int]</strong> <span style="font-family: mceinline;">classes of scala we were <span style="font-family: mceinline;">able to extend their functionality and give them a <strong>describe</strong> method</span></span> which to the user of our concept looks exactly like a regular method.</p>
 <p>Hence we can write our code generic and based on concepts and use models to convert our usual types to the concepts. As we saw we can different models for different parts of the application, so an html description can be different that a text description, but the "client code" is exactly the same.</p>
 <p>References:</p>
