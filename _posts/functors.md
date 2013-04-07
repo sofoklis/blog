@@ -1,5 +1,5 @@
 [title: Functors]: /
-[date: 2013/04/07 20:45:00 -0800]: /
+[date: 2013/04/07 3:45:00 -0800]: /
 [author: Sofoklis Papasofokli]: /
 [alias: /functors]: /
 
