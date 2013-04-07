@@ -1,6 +1,5 @@
 title: Functors
 date: 2013/04/07 20:45:00 -0800
-tags: [{"name":"functors","id":125268712},{"name":"category theory","id":125268711}]
 author: Sofoklis Papasofokli
 alias: /functors
 
