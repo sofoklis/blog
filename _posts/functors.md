@@ -1,9 +1,8 @@
 [title: Functors]: /
 [date: 2013/04/07 3:45:00 -0800]: /
+[tags: [{"name":"functor","id":125460785}, {"name":"map","id":125460786}, {"name":"category theory","id":125460786}]]: /
 [author: Sofoklis Papasofokli]: /
 [alias: /functors]: /
-
-## Functors
 
 A functor requires the following 2 properties:
 
