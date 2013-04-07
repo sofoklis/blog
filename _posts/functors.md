@@ -1,7 +1,7 @@
-title: Functors
-date: 2013/04/07 20:45:00 -0800
-author: Sofoklis Papasofokli
-alias: /functors
+[title: Functors]: /
+[date: 2013/04/07 20:45:00 -0800]: /
+[author: Sofoklis Papasofokli]: /
+[alias: /functors]: /
 
 ## Functors
 
