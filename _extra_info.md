@@ -1,5 +1,5 @@
 ---
-blog_root: /blog_posts
+blog_root: /_posts
 site_title: Learning Scala
 
 ---
