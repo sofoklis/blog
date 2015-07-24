@@ -9,15 +9,17 @@ alias: /logical-expression-parser
 <p>Since this was for for a platform closer to .NET and based on my reading of the Programming in Scala, i looked at parser combinators, and it seems that there are some things there for .NET see for example <a href="http://code.google.com/p/sprache/">Sprache</a> but finally we decided not to use it becuase we didnt want to use external libraries for this project. I ended up using <strong>new System.Data.DataTable().Compute(...)</strong> to evaluate the expression and regular expressions to limit the operations and tokens only to the rules defined for the particular validation.</p>
 <p>The solution works, but I really enjoyed the trip with <a href="http://www.artima.com/shop/programming_in_scala_2ed">parser combinators(Programming in Scala chapter 33)</a>, and I do feel that it is a great tool to have, so i decided to see how i could do the same in Scala, so here it goes:</p>
 <p>First I got the <a href="http://compilers.iecc.com/crenshaw/tutor6.txt">grammar</a> for the logical expression and then after reading the rules from the Programming in Scala book i ended up with the following class:</p>
-<script src="https://gist.github.com/3343973"></script>
+<script src="https://gist.github.com/3343973.js"></script>
+
 <p>I decided to make it a class that takes a Map[String, Boolean], so i can pass it to my expression parser. The additional benefit of this is that it parses expressions only for the variables in the map, anything else will fail during parsing, so you can really make sure your expression is correct according to your validation rules. One can restrict the rule names to propper identifiers or even more strict but that is outside the scope of this exersice. Finally the code that describes the logical expression is not more than 7 lines including parsing and evaluation which is mindblowing concidering that no external libraries are used just the core scala libraries.</p>
 <p>So lets have a look at one of the parsers:</p>
-<p><p><script src="https://gist.github.com/3483568"></script></p></p>
+<script src="https://gist.github.com/3483568.js"></script>
 <p>here the parser is splited in 2 parts, first the part before the ^^<span class="n">&nbsp;</span></p>
-<p><span class="n"><p><script src="https://gist.github.com/3483572"></script></p></span></p>
+<script src="https://gist.github.com/3483572.js"></script>
+
 <p>which is the actual parser saying that b_not_factor is an optional "not" followed by a factor.</p>
 <p>The next part is the part that is doing the evaluation:</p>
-<p><span class="o"><p><script src="https://gist.github.com/3483573"></script></p></span></p>
+<span class="o"><p><script src="https://gist.github.com/3483573.js"></script>
 <p>in this case we have 2 cases, one a "not" exists so we have to negate the b_factor, or it doesn't and then we just evaluate the b_factor.</p>
 <p>Finally the combination of these small parsers is what gives the grammar for the logical expression.</p>
 <div class="CodeRay">
